@@ -1,7 +1,8 @@
-import os
-from dotenv import load_dotenv
+
 import disnake
 from disnake.ext import commands
+import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -20,4 +21,5 @@ async def ping(inter):
 
 bot.load_extension("cogs.guild_info")
 
+print(f"TOKEN = {repr(TOKEN)}")
 bot.run(TOKEN)
