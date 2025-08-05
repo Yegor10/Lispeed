@@ -11,7 +11,7 @@ class UserInfo(commands.Cog):
         embed = disnake.Embed(
             title="All info about user",
             description=f"Shows all info about {user}",
-            colour="0000FF",
+            colour=disnake.Color.blue(),
         )
         embed.set_footer(text=f"All information about {user} was called by {inter.author}")
         if user.icon:
