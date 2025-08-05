@@ -20,6 +20,5 @@ async def ping(inter):
     await inter.response.send_message("Pong!")
 
 bot.load_extension("cogs.guild_info")
-
-print(f"TOKEN = {repr(TOKEN)}")
+bot.load_extension("cogs.user_info")
 bot.run(TOKEN)
