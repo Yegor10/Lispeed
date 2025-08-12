@@ -2,3 +2,4 @@
 *sosal.env
 __pycache__/
 .venv/
+warns.json
