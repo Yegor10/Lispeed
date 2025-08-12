@@ -36,6 +36,7 @@ class LockUnlock(commands.Cog):
                 description=f"Moderator: {inter.user}",
                 colour=disnake.Colour.blue()
             )
+            await channel.set_permissions(role, send_messages=True)
             await inter.response.send_message(embed=embed)
 
 def setup(bot):
