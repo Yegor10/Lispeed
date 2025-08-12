@@ -4,7 +4,7 @@ from disnake.ext import commands
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), "sosal.env"))
 
 TOKEN = os.getenv("TOKEN")
 intents = disnake.Intents.default()
@@ -19,7 +19,7 @@ async def on_ready():
 async def ping(inter):
     await inter.response.send_message("Pong!")
 
-for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
+for filename in os.listdir("bot/cogs"):
+    if filename.endswith(".py") and not filename.startswith("__"):
         bot.load_extension(f"cogs.{filename[:-3]}")
 bot.run(TOKEN)
