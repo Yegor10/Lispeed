@@ -7,12 +7,14 @@ from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(__file__), "sosal.env"))
 
 TOKEN = os.getenv("TOKEN")
-intents = disnake.Intents.default()
-intents.members = True
+intents = disnake.Intents.all()
 bot = commands.InteractionBot(intents=intents)
 
 @bot.event
 async def on_ready():
+    guild_count = len(bot.guilds)
+    custom_emoji = bot.get_emoji()
+    await bot.change_presence(activity=disnake.Activity(type=disnake.ActivityType.watching, name=f"за {guild_count} гильдиями", emoji=custom_emoji))
     print("Bot is ready")
 
 @bot.slash_command()
