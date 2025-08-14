@@ -147,10 +147,10 @@ class BadWords(commands.Cog):
                     break
 
                 try:
-                    await message.author.timeout(duration=timedelta(seconds=30), reason="Used a forbidden word")
+                    await message.author.timeout(duration=timedelta(seconds=10), reason="Used a forbidden word")
                     embed = disnake.Embed(
                         title="Forbidden Word Detected",
-                        description=f"{message.author.mention} has been muted for 30 seconds.",
+                        description=f"{message.author.mention} has been muted for 10 seconds.",
                         color=disnake.Color.red()
                     )
                     await message.channel.send(embed=embed, delete_after=10)
