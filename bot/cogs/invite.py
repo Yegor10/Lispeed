@@ -59,7 +59,7 @@ class InviteManagerCog(commands.Cog):
         invites[guild_id_str][user_id_str] = invites[guild_id_str].get(user_id_str, 0) + 1
         self.save_invites(invites)
 
-    @commands.slash_command()
+    @commands.slash_command(description="Set a channel to receive invite notifications")
     @commands.has_permissions(manage_channels=True)
     async def invites_setchannel(self, inter: disnake.ApplicationCommandInteraction, channel: disnake.TextChannel):
         self.set_channel_invite(channel.id)
@@ -70,7 +70,7 @@ class InviteManagerCog(commands.Cog):
         )
         await inter.response.send_message(embed=embed)
 
-    @commands.slash_command()
+    @commands.slash_command(description="Disable the invite notification channel")
     @commands.has_permissions(manage_channels=True)
     async def invites_disablechannel(self, inter: disnake.ApplicationCommandInteraction):
         self.set_channel_invite(None)
@@ -79,6 +79,20 @@ class InviteManagerCog(commands.Cog):
             description=f"Moderator: {inter.author.mention}",
             colour=disnake.Colour.purple()
         )
+        await inter.response.send_message(embed=embed)
+
+    @commands.slash_command(description="Check the number of invites for a user")
+    async def invites_check(self, inter: disnake.ApplicationCommandInteraction, user: disnake.User = None):
+        guild = inter.guild
+        target_user = user if user else inter.author
+
+        invite_count = self.get_invite_count(target_user.id, guild.id)
+        embed = disnake.Embed(
+            title=f"Invite Count for {target_user.name}",
+            description=f"{target_user.mention} has **{invite_count}** invite{'s' if invite_count != 1 else ''} in this server.",
+            colour=disnake.Colour.purple()
+        )
+        embed.set_thumbnail(url=target_user.avatar.url if target_user.avatar else None)
         await inter.response.send_message(embed=embed)
 
     @commands.Cog.listener()
