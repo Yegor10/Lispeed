@@ -107,7 +107,7 @@ class LevelsCog(commands.Cog):
                     colour=disnake.Colour.purple()
                 )
                 await message.channel.send(embed=embed)
-            elif user_messages == 16:
+            elif user_lvl == 16:
                 embed = disnake.Embed(
                     title="Level up!",
                     description=f"User {message.author.mention} has leveled up and now he is 16 (MAX LVL)!!!!!",
@@ -115,3 +115,6 @@ class LevelsCog(commands.Cog):
                 )
                 await message.channel.send(embed=embed)
                 break
+
+def setup(bot):
+    bot.add_cog(LevelsCog(bot))
