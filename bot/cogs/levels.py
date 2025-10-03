@@ -94,7 +94,7 @@ class LevelsCog(commands.Cog):
         user_id = str(message.author.id)
         self.add_message(guild_id, user_id)
         user_messages = self.load_user_messages(guild_id, user_id)
-
+        user_lvl = self.load_user_level(guild_id, user_id)
         lvls = [30, 60, 120, 240, 360, 480, 600, 800, 1200, 1400, 1600, 2400, 3000, 3400, 3600, 4800]
 
         for i in lvls:
